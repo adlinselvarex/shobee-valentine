@@ -66,6 +66,17 @@ input{
   to{transform:translateY(-110vh);opacity:0;}
 }
 
+/* BACKGROUND LOVE IMAGES */
+.bgLove{
+  position:fixed;
+  width:240px;
+  opacity:0.95;
+  z-index:0;
+}
+
+.leftLove{ bottom:0; left:0; }
+.rightLove{ bottom:0; right:0; }
+
 /* MAIN BOX */
 .container{
   position:absolute;
@@ -146,12 +157,17 @@ h1{font-size:1.9rem;}
 /* MOBILE */
 @media(max-width:768px){
   .photo{width:90px;}
+  .bgLove{width:140px;}
 }
 
 </style>
 </head>
 
 <body>
+
+<!-- LOVE BACKGROUND IMAGES -->
+<img src="valentine1.jpg" class="bgLove leftLove">
+<img src="valentine2.jpg" class="bgLove rightLove">
 
 <!-- PASSWORD -->
 <div id="lockScreen">
@@ -161,7 +177,7 @@ h1{font-size:1.9rem;}
 </div>
 
 <!-- MUSIC -->
-<audio autoplay loop>
+<audio id="bgMusic" loop>
   <source src="song.mp3" type="audio/mp3">
 </audio>
 
@@ -190,13 +206,21 @@ h1{font-size:1.9rem;}
 
 <script>
 
+/* MUSIC START */
+function startMusic(){
+  const music=document.getElementById("bgMusic");
+  music.volume=0.7;
+  music.play().catch(()=>{});
+}
+
 /* PASSWORD */
 function unlock(){
   const entered=document.getElementById("pass").value.toLowerCase().trim();
   if(entered==="bajitos"){
     document.getElementById("lockScreen").style.display="none";
+    startMusic();
   }else{
-    alert("Wrong password 😜");
+    alert("Wrong password Bajitos!!! 😜");
   }
 }
 
@@ -218,35 +242,21 @@ noBtn.addEventListener("mouseover",()=>{
 });
 
 /* YES CLICK */
-const yesBtn=document.getElementById("yesBtn");
-yesBtn.addEventListener("click",()=>{
+document.getElementById("yesBtn").addEventListener("click",()=>{
   document.getElementById("successMsg").style.display="block";
   document.getElementById("hiddenMsg").style.display="block";
-  yesBtn.style.display="none";
-  noBtn.style.display="none";
   heartLayout();
   showPromise();
 });
 
-/* ❤️ HEART LAYOUT */
+/* HEART LAYOUT */
 function heartLayout(){
-  document.getElementById("p1").style.top="35%";
-  document.getElementById("p1").style.left="40%";
-
-  document.getElementById("p2").style.top="25%";
-  document.getElementById("p2").style.left="50%";
-
-  document.getElementById("p3").style.top="35%";
-  document.getElementById("p3").style.left="60%";
-
-  document.getElementById("p4").style.top="50%";
-  document.getElementById("p4").style.left="45%";
-
-  document.getElementById("p5").style.top="50%";
-  document.getElementById("p5").style.left="55%";
-
-  document.getElementById("p6").style.top="60%";
-  document.getElementById("p6").style.left="50%";
+  p1.style.top="35%"; p1.style.left="40%";
+  p2.style.top="25%"; p2.style.left="50%";
+  p3.style.top="35%"; p3.style.left="60%";
+  p4.style.top="50%"; p4.style.left="45%";
+  p5.style.top="50%"; p5.style.left="55%";
+  p6.style.top="60%"; p6.style.left="50%";
 }
 
 /* PROMISE */
@@ -278,4 +288,3 @@ always, forever, yours — Shobee. ❤️`;
 
 </body>
 </html>
-
