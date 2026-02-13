@@ -6,20 +6,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For Shobee ❤️</title>
 
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
+
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       overflow: hidden;
-      background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+      background: linear-gradient(135deg, #ff0844, #ffb199);
       min-height: 100vh;
       color: white;
       text-align: center;
     }
 
-    /* DARK END */
+    /* DARK MODE */
     .darkMode {
       background: #1a0010 !important;
+      animation: bgPulse 3s infinite;
+    }
+
+    @keyframes bgPulse {
+      0% {
+        background: #1a0010;
+      }
+
+      50% {
+        background: #2a0018;
+      }
+
+      100% {
+        background: #1a0010;
+      }
     }
 
     /* LOGIN */
@@ -27,8 +45,7 @@
       position: fixed;
       width: 100%;
       height: 100vh;
-      background: url('valentine3.jpg') no-repeat center center;
-      background-size: cover;
+      background: url('valentine3.jpg') center/cover no-repeat;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -75,7 +92,7 @@
       }
     }
 
-    /* BACKGROUND LOVE IMAGES */
+    /* BACKGROUND LOVE */
     .bgLove {
       position: fixed;
       width: 240px;
@@ -94,6 +111,16 @@
       right: 0;
     }
 
+    .topLeftLove {
+      top: 0;
+      left: 0;
+    }
+
+    .topRightLove {
+      top: 0;
+      right: 0;
+    }
+
     /* MAIN BOX */
     .container {
       position: absolute;
@@ -102,17 +129,30 @@
       transform: translate(-50%, -50%);
       width: 92%;
       max-width: 480px;
-      background: rgba(0, 0, 0, 0.75);
       padding: 30px;
       border-radius: 22px;
       z-index: 20000;
-      /* Text on top of everything */
+      background: rgba(0, 0, 0, 0.5);
+      /* More transparent to see photos behind */
     }
 
-    /* TITLE */
-    h1 {
-      font-size: 1.9rem;
+    /* HEART OUTLINE SVG */
+    #heartOutline {
+      position: fixed;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90vmin;
+      height: 90vmin;
+      z-index: 10000;
+      pointer-events: none;
+      display: none;
+      filter: drop-shadow(0 0 10px red);
     }
+
+    /* ... styles ... */
+
+
 
     /* BUTTONS */
     .buttons {
@@ -128,13 +168,6 @@
       color: white;
       border: none;
       border-radius: 40px;
-      cursor: pointer;
-    }
-
-    #yesBtn:disabled {
-      background: #b33951;
-      cursor: not-allowed;
-      opacity: 0.7;
     }
 
     #noBtn {
@@ -150,69 +183,53 @@
     /* PHOTOS */
     .photo {
       position: fixed;
-      width: 140px;
+      width: 200px;
       border-radius: 18px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
       transition: all 1.6s ease;
       border: 2px solid rgba(255, 255, 255, 0.4);
-      z-index: 15000;
-      /* Above bg, below text */
+      transform: translate(-50%, -50%);
     }
 
     /* INITIAL POSITIONS */
     .photo:nth-of-type(1) {
-      top: 10%;
-      left: 6%;
-    }
-
-    .photo:nth-of-type(2) {
-      top: 70%;
-      left: 12%;
-    }
-
-    .photo:nth-of-type(3) {
-      top: 18%;
-      left: 82%;
-    }
-
-    .photo:nth-of-type(4) {
-      top: 65%;
-      left: 78%;
-    }
-
-    .photo:nth-of-type(5) {
-      top: 40%;
+      top: 15%;
       left: 15%;
     }
 
+    .photo:nth-of-type(2) {
+      top: 75%;
+      left: 15%;
+    }
+
+    .photo:nth-of-type(3) {
+      top: 20%;
+      left: 85%;
+    }
+
+    .photo:nth-of-type(4) {
+      top: 70%;
+      left: 85%;
+    }
+
+    .photo:nth-of-type(5) {
+      top: 45%;
+      left: 10%;
+    }
+
     .photo:nth-of-type(6) {
-      top: 30%;
-      left: 60%;
+      top: 45%;
+      left: 90%;
     }
 
-    /* TEXT */
-    #successMsg {
+    #successMsg,
+    #hiddenMsg,
+    #typing,
+    #finalLine {
       display: none;
-      font-size: 1.8rem;
-      margin-top: 15px;
-    }
-
-    #hiddenMsg {
-      display: none;
-      font-size: 1.5rem;
-      margin-top: 10px;
-    }
-
-    #typing {
-      display: none;
-      font-size: 1.4rem;
-      margin-top: 20px;
-      white-space: pre-wrap;
-      /* Maintain newlines in poem */
     }
 
     #finalLine {
-      display: none;
       font-size: 2rem;
       margin-top: 25px;
       animation: heartbeat 1.2s infinite;
@@ -232,14 +249,35 @@
       }
     }
 
-    /* MOBILE */
-    @media(max-width:768px) {
-      .photo {
-        width: 90px;
+    /* FIREWORK */
+    @keyframes explode {
+      from {
+        transform: scale(0);
+        opacity: 1;
       }
 
-      .bgLove {
-        width: 140px;
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+    /* CONFETTI */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: red;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      from {
+        transform: translateY(-10vh);
+      }
+
+      to {
+        transform: translateY(110vh);
       }
     }
   </style>
@@ -247,23 +285,21 @@
 
 <body>
 
-  <!-- LOVE BACKGROUND IMAGES -->
   <img src="valentine1.jpg" class="bgLove leftLove">
   <img src="valentine2.jpg" class="bgLove rightLove">
+  <img src="valentine4.jpg" class="bgLove topLeftLove">
+  <img src="valentine5.jpg" class="bgLove topRightLove">
 
-  <!-- PASSWORD -->
   <div id="lockScreen">
     <h2>Enter Secret Password ❤️</h2>
     <input type="password" id="pass" placeholder="Password">
     <button class="openBtn" onclick="unlock()">OPEN ❤️</button>
   </div>
 
-  <!-- MUSIC -->
-  <audio id="bgMusic" loop autoplay>
+  <audio id="bgMusic" loop>
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- PHOTOS -->
   <img src="photo1.jpg" class="photo" id="p1">
   <img src="photo2.jpg" class="photo" id="p2">
   <img src="photo3.jpg" class="photo" id="p3">
@@ -271,10 +307,8 @@
   <img src="photo5.jpg" class="photo" id="p5">
   <img src="photo6.jpg" class="photo" id="p6">
 
-  <!-- MAIN -->
   <div class="container">
     <h1>Shobee Kutty, will you be my Valentine? ❤️</h1>
-
     <div class="buttons">
       <button id="yesBtn">YES 💖</button>
       <button id="noBtn">No 🙈</button>
@@ -286,20 +320,33 @@
     <div id="finalLine">Will you stay with me forever? ❤️</div>
   </div>
 
+  <!-- HEART OUTLINE -->
+  <svg id="heartOutline" viewBox="0 0 24 24" fill="none" stroke="#ff0000" stroke-width="0.3">
+    <path
+      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+  </svg>
+
   <script>
 
-    /* MUSIC START */
+    /* MUSIC CONTROL */
+    let musicPlayed = false;
     function startMusic() {
       const music = document.getElementById("bgMusic");
-      if (music.paused) {
-        music.volume = 0.7;
-        music.play().catch(() => {
-          console.log("Autoplay blocked. Waiting for interaction.");
-        });
-      }
+      if (musicPlayed) return;
+
+      music.volume = 0;
+      music.play().then(() => {
+        musicPlayed = true;
+        let v = 0;
+        const fade = setInterval(() => {
+          if (v < 0.7) { v += 0.05; music.volume = v; } else clearInterval(fade);
+        }, 200);
+      }).catch(() => {
+        console.log("Autoplay blocked. Waiting for interaction.");
+      });
     }
 
-    /* ATTEMPT AUTOPLAY & FOCUS */
+    /* AUTOPLAY & FOCUS */
     window.addEventListener('load', () => {
       startMusic();
       const p = document.getElementById("pass");
@@ -319,7 +366,7 @@
       }
     }
 
-    /* HEARTS */
+    /* HEART FLOAT */
     setInterval(() => {
       const h = document.createElement("div");
       h.className = "heart";
@@ -330,30 +377,66 @@
     }, 400);
 
     /* NO FLOAT */
-    const noBtn = document.getElementById("noBtn");
-    noBtn.addEventListener("mouseover", () => {
+    noBtn.onmouseover = noBtn.ontouchstart = () => {
       noBtn.style.left = Math.random() * (window.innerWidth - 100) + "px";
       noBtn.style.top = Math.random() * (window.innerHeight - 100) + "px";
-    });
+    };
 
     /* YES CLICK */
-    document.getElementById("yesBtn").addEventListener("click", (e) => {
-      e.target.disabled = true; // Prevent multiple clicks
-      document.getElementById("successMsg").style.display = "block";
-      document.getElementById("hiddenMsg").style.display = "block";
+    yesBtn.onclick = () => {
+      document.querySelector("h1").style.display = "none";
+      document.querySelector(".buttons").style.display = "none";
+      successMsg.style.display = "block";
+      hiddenMsg.style.display = "block";
+
+      fireworks();
+      confetti();
+      navigator.vibrate([200, 100, 200]);
       heartLayout();
       showPromise();
-    });
+    };
+
+    /* FIREWORK */
+    function fireworks() {
+      for (let i = 0; i < 30; i++) {
+        const f = document.createElement("div");
+        f.innerHTML = "✨";
+        f.style.position = "fixed";
+        f.style.left = Math.random() * 100 + "vw";
+        f.style.top = Math.random() * 100 + "vh";
+        f.style.fontSize = "24px";
+        f.style.animation = "explode 1s ease-out forwards";
+        document.body.appendChild(f);
+        setTimeout(() => f.remove(), 1000);
+      }
+    }
+
+    /* CONFETTI */
+    function confetti() {
+      for (let i = 0; i < 40; i++) {
+        const c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = Math.random() * 100 + "vw";
+        c.style.background = `hsl(${Math.random() * 360},80%,60%)`;
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 3000);
+      }
+    }
 
     /* HEART LAYOUT */
     function heartLayout() {
-      p1.style.top = "35%"; p1.style.left = "40%";
-      p2.style.top = "25%"; p2.style.left = "50%";
-      p3.style.top = "35%"; p3.style.left = "60%";
-      p4.style.top = "50%"; p4.style.left = "45%";
-      p5.style.top = "50%"; p5.style.left = "55%";
-      p6.style.top = "60%"; p6.style.left = "50%";
+      // Show Outline
+      document.getElementById("heartOutline").style.display = "block";
+
+      // Photos on Border (Adjusted for 90vmin SVG centered at 55% top)
+      p1.style.top = "25%"; p1.style.left = "25%";
+      p2.style.top = "25%"; p2.style.left = "75%";
+      p3.style.top = "50%"; p3.style.left = "10%";
+      p4.style.top = "50%"; p4.style.left = "90%";
+      p5.style.top = "80%"; p5.style.left = "35%";
+      p6.style.top = "80%"; p6.style.left = "65%";
     }
+
 
     /* PROMISE */
     function showPromise() {
@@ -361,23 +444,19 @@
 and your strength when your heart feels tired…
 always, forever, yours — Shobee. ❤️`;
 
-      const typingDiv = document.getElementById("typing");
-      typingDiv.style.display = "block";
-
+      typing.style.display = "block";
       let i = 0;
-      function type() {
+      (function type() {
         if (i < text.length) {
-          typingDiv.innerHTML += text.charAt(i);
-          i++;
+          typing.innerHTML += text.charAt(i++);
           setTimeout(type, 40);
         } else {
           setTimeout(() => {
             document.body.classList.add("darkMode");
-            document.getElementById("finalLine").style.display = "block";
+            finalLine.style.display = "block";
           }, 1500);
         }
-      }
-      type();
+      })();
     }
 
   </script>
