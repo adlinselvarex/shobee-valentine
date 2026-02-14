@@ -20,6 +20,12 @@
       text-align: center;
     }
 
+    /* Allow scrolling on mobile when content expands */
+    body.allow-scroll {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
     /* DARK MODE */
     .darkMode {
       background: #1a0010 !important;
@@ -346,10 +352,14 @@
 
       /* After YES is clicked - allow container to expand */
       .container.expanded {
+        position: fixed;
+        top: 10vh;
+        transform: translateX(-50%);
         height: auto;
         min-height: 80vmin;
         max-height: none;
         overflow: visible;
+        padding-bottom: 40px;
       }
 
       .container h1 {
@@ -542,18 +552,22 @@
 
     /* YES CLICK */
     yesBtn.onclick = () => {
+      console.log("YES button clicked!");
       const container = document.querySelector(".container");
       document.querySelector("h1").style.display = "none";
       document.querySelector(".buttons").style.display = "none";
       container.style.background = "none";
       container.classList.add("expanded"); // Allow container to expand on mobile
+      document.body.classList.add("allow-scroll"); // Enable scrolling on mobile
       successMsg.style.display = "block";
       hiddenMsg.style.display = "block";
+      console.log("Success messages displayed");
 
       fireworks();
       confetti();
       navigator.vibrate([200, 100, 200]);
       heartLayout();
+      console.log("About to call showPromise()");
       showPromise();
     };
 
@@ -601,20 +615,29 @@
 
     /* PROMISE */
     function showPromise() {
+      console.log("showPromise() called");
       const text = `I promise to be your peace when the world feels heavy,
 and your strength when your heart feels tired…
 always, forever, yours — Shobee. ❤️`;
 
-      typing.style.display = "block";
+      const typingElement = document.getElementById("typing");
+      console.log("Typing element:", typingElement);
+      console.log("Setting typing display to block");
+      typingElement.style.display = "block";
+
       let i = 0;
       (function type() {
         if (i < text.length) {
-          typing.innerHTML += text.charAt(i++);
+          typingElement.innerHTML += text.charAt(i++);
           setTimeout(type, 40);
         } else {
+          console.log("Typing complete, showing final line in 1.5s");
           setTimeout(() => {
             document.body.classList.add("darkMode");
-            finalLine.style.display = "block";
+            const finalLineElement = document.getElementById("finalLine");
+            console.log("Final line element:", finalLineElement);
+            finalLineElement.style.display = "block";
+            console.log("Final line displayed");
           }, 1500);
         }
       })();
