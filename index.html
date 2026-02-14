@@ -306,22 +306,24 @@
 
     /* MOBILE RESPONSIVENESS */
     @media (max-width: 768px) {
+
+      /* Background decorative images - smaller on mobile */
       .bgLove {
-        width: 25vw;
-        /* Smaller for mobile to prevent overlap */
-        max-width: 110px;
+        width: 22vw;
+        max-width: 100px;
       }
 
+      /* Lock Screen (Sign-in page) */
       #lockScreen h2 {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
         margin-bottom: 15px;
         z-index: 50000;
-        /* Ensure text is above if overlap happens */
         position: relative;
+        padding: 0 20px;
       }
 
       .openBtn {
-        padding: 12px 30px;
+        padding: 14px 35px;
         font-size: 18px;
         z-index: 50000;
         position: relative;
@@ -330,6 +332,96 @@
       input {
         z-index: 50000;
         position: relative;
+        width: 80%;
+        max-width: 280px;
+      }
+
+      /* Main container with heart shape */
+      .container {
+        width: 90vmin;
+        height: 80vmin;
+        padding: 20px;
+        padding-top: 60px;
+      }
+
+      .container h1 {
+        font-size: 1.4rem;
+        line-height: 1.4;
+      }
+
+      /* Buttons */
+      #yesBtn {
+        font-size: 1.3rem;
+        padding: 14px 32px;
+      }
+
+      #noBtn {
+        font-size: 0.9rem;
+        padding: 8px 18px;
+      }
+
+      /* Success messages */
+      #successMsg {
+        font-size: 1.6rem;
+        margin-top: 10px;
+      }
+
+      #hiddenMsg {
+        font-size: 1.3rem;
+        margin-top: 8px;
+      }
+
+      /* Typing animation text */
+      #typing {
+        font-size: 1.1rem;
+        margin-top: 15px;
+        padding: 0 15px;
+        line-height: 1.5;
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Final line */
+      #finalLine {
+        font-size: 1.4rem;
+        margin-top: 20px;
+        padding: 0 15px;
+      }
+
+      /* Photos - smaller on mobile */
+      .photo {
+        width: 140px;
+      }
+
+      /* Heart outline SVG */
+      #heartOutline {
+        width: 95vmin;
+        height: 95vmin;
+      }
+    }
+
+    /* Tablet and small laptop screens */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .container {
+        width: 75vmin;
+        height: 65vmin;
+      }
+
+      .container h1 {
+        font-size: 1.8rem;
+      }
+
+      #typing {
+        font-size: 1.4rem;
+      }
+
+      #finalLine {
+        font-size: 1.7rem;
+      }
+
+      .photo {
+        width: 180px;
       }
     }
   </style>
