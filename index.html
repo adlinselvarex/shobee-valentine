@@ -303,6 +303,35 @@
         transform: translateY(110vh);
       }
     }
+
+    /* MOBILE RESPONSIVENESS */
+    @media (max-width: 768px) {
+      .bgLove {
+        width: 25vw;
+        /* Smaller for mobile to prevent overlap */
+        max-width: 110px;
+      }
+
+      #lockScreen h2 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        z-index: 50000;
+        /* Ensure text is above if overlap happens */
+        position: relative;
+      }
+
+      .openBtn {
+        padding: 12px 30px;
+        font-size: 18px;
+        z-index: 50000;
+        position: relative;
+      }
+
+      input {
+        z-index: 50000;
+        position: relative;
+      }
+    }
   </style>
 </head>
 
